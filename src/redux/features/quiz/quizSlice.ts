@@ -12,17 +12,29 @@ export interface QuizQuestion {
 
 export interface QuizState {
   questions: QuizQuestion[];
+  currentQuesIndex: number;
+  userAnswer: (string | null)[];
 }
 
 // Define the initial state using that type
 const initialState: QuizState = {
-  questions : quizData
+  questions : quizData,
+  currentQuesIndex : 7,
+  userAnswer:Array(quizData.length).fill(null)
 }
 
 export const quizSlice = createSlice({
   name: 'quiz',
   initialState,
-  reducers: {}
+  reducers: {
+      setAnswer:(state,action)=>{
+        const{questionIndex,answer}=action.payload
+        state.userAnswer[questionIndex] = answer
+        // console.log(questionIndex,answer)
+      }
+
+  },
 })
 
+export const {setAnswer} = quizSlice.actions
 export default quizSlice.reducer
