@@ -8,17 +8,24 @@ export default function Question() {
   console.log(currentQuestion);
 
   return (
-    <div className="flex justify-center mt-5">
-      <Card className="w-[450px]">
-        <CardHeader>
-          <CardTitle>{currentQuestion.question}</CardTitle>
+    <div className="flex justify-center mt-8 px-3">
+      <Card className="w-full max-w-[500px] shadow-lg border border-gray-200 rounded-2xl">
+        <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-500 rounded-t-2xl text-white -mt-6">
+          <CardTitle className="text-lg font-semibold">
+            {currentQuestion?.question}
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div>
-            {currentQuestion.options.map((option, index) => (
-              <div className="flex flex-wrap items-center gap-2 md:flex-row" >
-                <Button className="my-1" variant ="outline" key={index}>{option}</Button>
-              </div>
+
+        <CardContent className="mt-4">
+          <div className="grid gap-3">
+            {currentQuestion?.options.map((option, index) => (
+              <Button
+                key={index}
+                variant="outline"
+                className="w-full justify-start px-4 py-2 rounded-lg border-gray-300 hover:bg-indigo-50 hover:border-indigo-400 transition-all duration-200 ease-in-out"
+              >
+                {option}
+              </Button>
             ))}
           </div>
         </CardContent>
