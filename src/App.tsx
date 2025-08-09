@@ -1,11 +1,7 @@
-import { Button } from "@/components/ui/button"
+import Question from "./home/Question";
 
 function App() {
-  return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
-)
+  return <Question />;
 }
 
-export default App
+export default App;

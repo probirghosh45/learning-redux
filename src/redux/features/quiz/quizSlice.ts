@@ -1,15 +1,22 @@
-import type { RootState } from '@/redux/store'
+import { quizData } from '@/home/questionData'
 import { createSlice } from '@reduxjs/toolkit'
 
 
 // Define a type for the slice state
+export interface QuizQuestion {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+}
+
 export interface QuizState {
-  value: number
+  questions: QuizQuestion[];
 }
 
 // Define the initial state using that type
 const initialState: QuizState = {
-  value: 0
+  questions : quizData
 }
 
 export const quizSlice = createSlice({
@@ -17,9 +24,5 @@ export const quizSlice = createSlice({
   initialState,
   reducers: {}
 })
-
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.counter.value
 
 export default quizSlice.reducer
