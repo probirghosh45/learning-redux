@@ -79,7 +79,7 @@ export default function QuizSummary() {
             {rating === "Excellent"
               ? "Outstanding performance! 🎉"
               : rating === "Good"
-              ? "Well done! Keep improving. 💪" 
+              ? "Well done! Keep improving. 💪"
               : "Don’t give up! Practice makes perfect. 🚀"}
           </p>
         </div>
