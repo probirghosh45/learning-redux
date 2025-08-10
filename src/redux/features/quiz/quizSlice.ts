@@ -13,14 +13,16 @@ export interface QuizState {
   questions: QuizQuestion[];
   currentQuesIndex: number;
   userAnswer: (string | null)[];
+  quizComplete: boolean;
 }
 
-// Define the initial state using that type
 const initialState: QuizState = {
   questions: quizData,
   currentQuesIndex: 0,
   userAnswer: Array(quizData.length).fill(null),
+  quizComplete: false,
 };
+
 
 export const quizSlice = createSlice({
   name: "quiz",
@@ -41,8 +43,11 @@ export const quizSlice = createSlice({
         state.currentQuesIndex -= 1;
       }
     },
+    completeQuiz : (state) =>{
+        state.quizComplete = true
+    }
   },
 });
 
-export const { setAnswer, nextQuestion , previousQuestion } = quizSlice.actions;
+export const { setAnswer, nextQuestion , previousQuestion , completeQuiz } = quizSlice.actions;
 export default quizSlice.reducer;

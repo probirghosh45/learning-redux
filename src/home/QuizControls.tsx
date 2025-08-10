@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { nextQuestion, previousQuestion,  } from "@/redux/features/quiz/quizSlice";
+import { completeQuiz, nextQuestion, previousQuestion } from "@/redux/features/quiz/quizSlice";
 import { useAppSelector } from "@/redux/hooks";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
@@ -30,24 +30,36 @@ export default function QuizControls() {
   };
 
   const handlePrevious = () => {
-    // if (!isAnswerSelected) {
-    //   toast.error("Please select an answer before proceeding.", {
-    //     style: {
-    //       borderRadius: "8px",
-    //       background: "#333",
-    //       color: "#fff",
-    //     },
-    //   });
-    //   return;
-    // }
     dispatch(previousQuestion());
+  };
+
+  const handleSubmit = () => {
+    if (!isAnswerSelected) {
+      toast.error("Please select an answer before submitting.", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      return;
+    }
+
+    toast.success("✅ Your answers have been submitted successfully!", {
+      style: {
+        borderRadius: "8px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+
+    dispatch(completeQuiz())
   };
 
   return (
     <div className="flex justify-between mt-6 px-2">
       {isFirstQuestion ? (
-        // Invisible placeholder to keep spacing
-        <div className="w-[120px]"></div>
+        <div className="w-[120px]"></div> // spacing fix
       ) : (
         <Button
           variant="outline"
@@ -59,7 +71,15 @@ export default function QuizControls() {
         </Button>
       )}
 
-      {!isLastQuestion && (
+      {isLastQuestion ? (
+        <Button
+          className="px-5 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white transition-all duration-200 flex items-center gap-2"
+          onClick={handleSubmit}
+        >
+          Submit Answers
+          <CheckCircle2 size={18} />
+        </Button>
+      ) : (
         <Button
           className="px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white transition-all duration-200 flex items-center gap-2"
           onClick={handleNext}
